@@ -1,0 +1,24 @@
+{
+  "timeZone": "America/New_York",
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8",
+  "dependencies": {
+    "libraries": [
+      {
+        "userSymbol": "Cheerio",
+        "libraryId": "1ReeQ6WO8kKNxoaA_O0XEQ589cIrRvEBA9qcWpNqdOP17i47u6N9M5Xh0",
+        "version": "14"
+      },
+      {
+        "userSymbol": "Parser",
+        "libraryId": "1Mc8BthYthXx6CoIz90-JiSzSafVnT6U3t0z_W3hLTAX5ek4w0G_EIrNw",
+        "version": "8"
+      },
+      {
+        "userSymbol": "Html",
+        "libraryId": "1xEX-HYWGlv01XZYTdDAl_k3FT8XpbrLz_79s0elwgcZ5deHgqHQzEgWD",
+        "version": "10"
+      }
+    ]
+  }
+}
