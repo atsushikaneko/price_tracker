@@ -5,7 +5,6 @@ class Scraper{
   }
 
   execute(sheet_name){
-    // const sheet = this.ss.getSheets()[0];
     const sheet = this.ss.getSheetByName(sheet_name);
     const values = sheet.getDataRange().getValues()
     const lastColumn = sheet.getLastColumn();
