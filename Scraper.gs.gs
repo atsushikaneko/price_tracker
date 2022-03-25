@@ -1,9 +1,12 @@
 class Scraper{
-  // constructor(sheet) {
-  //   this.sheet = sheet
-  // }
+  constructor() {
+    this.ss = SpreadsheetApp.getActiveSpreadsheet();
+    this.cacheStore = new CacheStore();
+  }
 
-  execute(sheet, cacheStore){
+  execute(sheet_name){
+    // const sheet = this.ss.getSheets()[0];
+    const sheet = this.ss.getSheetByName(sheet_name);
     const values = sheet.getDataRange().getValues()
     const lastColumn = sheet.getLastColumn();
 
@@ -22,7 +25,6 @@ class Scraper{
       continue 
     }
 
-    console.log(values[urlRow][i]);
     const url = values[urlRow][i]
     if(!(url)){
       arr.push("URLを入力ください")
@@ -30,8 +32,8 @@ class Scraper{
     }
     let $
 
-    if (cacheStore.hasValue(url)){
-      $ = cacheStore.read(url)
+    if (this.cacheStore.hasValue(url)){
+      $ = this.cacheStore.read(url)
     } else {
       try {
         let html = UrlFetchApp.fetch(url).getContentText()
@@ -40,7 +42,7 @@ class Scraper{
         arr.push(e.message.replace(/\r?\n/g, ''))
         continue
       }
-      cacheStore.write(url, $)
+      this.cacheStore.write(url, $)
     }
 
     let model_selector = values[modelSelectorRow][i]
