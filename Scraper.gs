@@ -8,23 +8,18 @@ class Scraper{
     const sheet = this.ss.getSheetByName(sheet_name);
     const values = sheet.getDataRange().getValues()
     const lastColumn = sheet.getLastColumn();
-
-    const modelNameRow         = 0
-    const urlRow               = 2
-    const modelNameSelectorRow = 3
-    const priceSelectorRow     = 4
     
     const today = new Date();
     const arr = [today]
 
     for(let i = 1; i < lastColumn; i++) {
-    let modelName = values[modelNameRow][i];
+    let modelName = values[Setting.modelNameRow][i];
     if(!(modelName)){
       arr.push("")
       continue 
     }
 
-    const url = values[urlRow][i]
+    const url = values[Setting.urlRow][i]
     if(!(url)){
       arr.push("URLを入力ください")
       continue 
@@ -45,7 +40,7 @@ class Scraper{
       this.cacheStore.write(url, $)
     }
 
-    let model_name_selector = values[modelNameSelectorRow][i]
+    let model_name_selector = values[Setting.modelNameSelectorRow][i]
     if(!(model_name_selector)){
       arr.push("機種名selectorを入力ください")
       continue 
@@ -56,7 +51,7 @@ class Scraper{
       continue
     }
     
-    let price_selector = values[priceSelectorRow][i]
+    let price_selector = values[Setting.priceSelectorRow][i]
     if(!(price_selector)){
       arr.push("価格selectorを入力ください")
       continue 
