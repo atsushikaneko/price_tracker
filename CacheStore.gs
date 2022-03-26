@@ -3,15 +3,15 @@ class CacheStore{
     this.store = {}
   }
 
-  read(url){
-    return this.store[url]
+  read(key){
+    return this.store[key]
   }
 
-  write(url, html){
-    this.store[url] = html
+  write(key, value){
+    this.store[key] = value
   }
 
-  hasValue(url){
-    return !!(this.store[url])
+  hasValue(key){
+    return !!(this.store[key])
   }
 }
