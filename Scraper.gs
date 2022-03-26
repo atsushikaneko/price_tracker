@@ -26,7 +26,7 @@ class Scraper{
     }
     let $
 
-    // 同URLはキャッシュしたパース済HTMLを使い回し無駄な通信を防ぐ
+    // 同URLの場合は、キャッシュしたパース済HTMLを使い回し無駄な通信を防ぐ
     if (this.cacheStore.hasValue(url)){
       $ = this.cacheStore.read(url)
     } else {
