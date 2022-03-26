@@ -9,17 +9,17 @@ class Scraper{
     const values = sheet.getDataRange().getValues()
     const lastColumn = sheet.getLastColumn();
 
-    const modelRow         = 0
-    const urlRow           = 2
-    const modelSelectorRow = 3
-    const priceSelectorRow = 4
+    const modelNameRow         = 0
+    const urlRow               = 2
+    const modelNameSelectorRow = 3
+    const priceSelectorRow     = 4
     
     const today = new Date();
     const arr = [today]
 
     for(let i = 1; i < lastColumn; i++) {
-    let model = values[modelRow][i];
-    if(!(model)){
+    let modelName = values[modelNameRow][i];
+    if(!(modelName)){
       arr.push("")
       continue 
     }
@@ -31,6 +31,7 @@ class Scraper{
     }
     let $
 
+    // 同URLはキャッシュしたパース済HTMLを使い回し無駄な通信を防ぐ
     if (this.cacheStore.hasValue(url)){
       $ = this.cacheStore.read(url)
     } else {
@@ -44,17 +45,14 @@ class Scraper{
       this.cacheStore.write(url, $)
     }
 
-    let model_selector = values[modelSelectorRow][i]
-    if(!(model_selector)){
-      arr.push("機種selectorを入力ください")
+    let model_name_selector = values[modelNameSelectorRow][i]
+    if(!(model_name_selector)){
+      arr.push("機種名selectorを入力ください")
       continue 
     }
-    let model_scraped = $(model_selector).text();
-    console.log(model_scraped.replace(/\s+/g, ''));
-    console.log(model.replace(/\s+/g, ''));
-    console.log(model.replace(/\s+/g, '').match(new RegExp(model_scraped.replace(/\s+/g, '')),"i"));
-    if(!(model_scraped.replace(/\s+/g, '').match(model.replace(/\s+/g, '')))){
-      arr.push("ページ構造が変化したか機種selectorが正しくないので、ご確認ください")
+    let scraped_model_name = $(model_name_selector).text();
+    if(!(scraped_model_name.replace(/\s+/g, '').match(modelName.replace(/\s+/g, '')))){
+      arr.push("ページ構造が変化したか機種名selectorが正しくないので、ご確認ください")
       continue
     }
     
@@ -63,13 +61,13 @@ class Scraper{
       arr.push("価格selectorを入力ください")
       continue 
     }
-    let price = $(price_selector).text();
-    if(!(price)){ 
+    let scraped_price = $(price_selector).text();
+    if(!(scraped_price)){ 
       arr.push("指定の価格selectorで要素を取得できません") 
       continue
     }
 
-    arr.push(price)
+    arr.push(scraped_price)
   }
   sheet.appendRow(arr)
   }
