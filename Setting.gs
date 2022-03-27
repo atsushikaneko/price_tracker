@@ -1,5 +1,6 @@
-class Setting{
-}
+class Setting{}
+
+// 監視対象シート
 Setting.target_sheet_names   = ["携帯空間", "買取商店", "買取ベストワン", "MORIMORI"]
 
 Setting.modelNameRow         = 0
