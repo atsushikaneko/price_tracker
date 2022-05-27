@@ -56,7 +56,7 @@ class Scraper{
       arr.push("価格selectorを入力ください")
       continue 
     }
-    let scraped_price = $(price_selector).text();
+    let scraped_price = $(price_selector).text().replace(/\r?\n/g, '');
     if(!(scraped_price)){ 
       arr.push("指定の価格selectorで要素を取得できません") 
       continue
