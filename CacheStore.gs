@@ -1,17 +1,17 @@
-class CacheStore{
+class CacheStore {
   constructor() {
     this.store = {}
   }
 
-  read(key){
+  read(key) {
     return this.store[key]
   }
 
-  write(key, value){
+  write(key, value) {
     this.store[key] = value
   }
 
-  hasValue(key){
+  hasValue(key) {
     return !!(this.store[key])
   }
 }
